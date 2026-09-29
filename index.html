@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prototipo Chatbot C.D. Malilla</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="contenedor-chatbot">
+        
+        <button id="boton-mascota" onclick="alternarChat()">
+            <img id="imagen-mascota" src="MalyIdle.png" alt="Maly - C.D. Malilla">
+            <span id="bocadillo-alerta" class="bocadillo-alerta">Hola, soy Maly, pregúntame para cualquier duda.</span>
+        </button>
+
+        <div id="ventana-chat" class="oculto">
+            <div class="cabecera-chat">
+                <div class="info-bot-cabecera">
+                    <img src="Maly.jpg" alt="Avatar Maly" class="avatar-cabecera">
+                    
+                    <div class="textos-cabecera">
+                        <h4>Maly</h4>
+                        <span class="estado-en-linea">En línea</span>
+                    </div>
+                </div>
+                
+                <button class="boton-cerrar" onclick="alternarChat()">✕</button>
+            </div>
+
+            <div id="cuerpo-chat">
+                <div class="mensaje bot">
+                    ¡Hola! Soy Maly, la mascota del C.D. Malilla. ¿En qué puedo ayudarte hoy sobre las inscripciones o la escuela?
+                </div>
+            </div>
+
+            <div class="pie-chat">
+                <input type="text" id="input-usuario" placeholder="Escribe tu duda aquí..." onkeypress="evaluarTecla(event)">
+                <button id="boton-enviar" disabled>➤</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
