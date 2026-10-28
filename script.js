@@ -9,6 +9,10 @@ let botonEnReproduccion = null;
 
 const inputUsuario = document.getElementById('input-usuario');
 const botonEnviar = document.getElementById('boton-enviar');
+   // Despierta el servidor (Render Free se duerme tras un rato sin uso) en cuanto se carga la página
+   window.addEventListener('load', () => {
+       fetch(`${API_BASE_URL}/api/Chat/ping`).catch(() => {});
+   });
 
 const preguntasQuiz = [
     {
@@ -261,14 +265,24 @@ function enviarMensaje() {
     document.getElementById("imagen-mascota").src = "MalyThinking.png";
     const tiempoInicio = Date.now();
 
+    // Si el servidor tarda (Render lo duerme tras un rato sin uso), avisamos al usuario
+    let avisoDespertar = null;
+    const temporizadorAviso = setTimeout(() => {
+        avisoDespertar = document.createElement("div");
+        avisoDespertar.classList.add("mensaje", "bot");
+        avisoDespertar.textContent = "Un momento, que me estoy despertando... ☕";
+        cuerpoChat.appendChild(avisoDespertar);
+        cuerpoChat.scrollTop = cuerpoChat.scrollHeight;
+    }, 6000);
+
     fetch(`${API_BASE_URL}/api/Chat`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ 
-        mensaje: textoMensaje,
-        historial: historialConversacion
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ 
+            mensaje: textoMensaje,
+            historial: historialConversacion
+        })
     })
-})  
     .then(response => {
         if (!response.ok) throw new Error("Error en el servidor");
         return response.json();
@@ -300,8 +314,13 @@ function enviarMensaje() {
             cuerpoChat.scrollTop = cuerpoChat.scrollHeight;
             document.getElementById("imagen-mascota").src = "MalyIdle.png";
         }, 1500);
+    })
+    .finally(() => {
+        clearTimeout(temporizadorAviso);
+        if (avisoDespertar) avisoDespertar.remove();
     });
 }
+
 
 function preguntarConfirmacionQuiz() {
     enModoQuiz = true;
