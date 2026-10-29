@@ -77,6 +77,7 @@ function validarEntrada() {
     }
 }
 
+
 inputUsuario.addEventListener('input', validarEntrada);
 botonEnviar.addEventListener('click', enviarMensaje);
 
@@ -470,12 +471,11 @@ function finalizarQuiz() {
     enModoQuiz = false;
     inputUsuario.disabled = false;
     validarEntrada(); 
+}
 
-    function enviarOpcion(texto) {
+function enviarOpcion(texto) {
     const opciones = document.getElementById('opciones-iniciales');
     if (opciones) opciones.remove();
-    const input = document.getElementById('input-usuario');
-    input.value = texto;
+    inputUsuario.value = texto;
     enviarMensaje();
-}
 }
