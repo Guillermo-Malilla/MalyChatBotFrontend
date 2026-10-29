@@ -405,26 +405,38 @@ p {
         z-index: 10000;
     }
     .opciones-iniciales {
+        --color-principal: #1a5fb4;
         display: flex;
         flex-direction: column;
-        gap: 8px;
-        margin: 4px 0 8px 0;
+        gap: 10px;
+        margin: 6px 0 10px 0;
         align-items: flex-start;
     }
 
         .opciones-iniciales button {
-            background: #ffffff;
-            border: 1.5px solid #1a5fb4;
-            color: #1a5fb4;
-            padding: 8px 16px;
-            border-radius: 18px;
-            font-size: 14px;
+            font-family: inherit;
+            font-size: 14.5px;
+            font-weight: 600;
+            color: var(--color-principal);
+            background: #eef4fc;
+            border: 1px solid #d3e2f7;
+            padding: 10px 18px;
+            border-radius: 999px;
             cursor: pointer;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+            transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease, color 0.15s ease;
         }
 
             .opciones-iniciales button:hover {
-                background: #1a5fb4;
+                background: var(--color-principal);
                 color: #ffffff;
+                transform: translateY(-1px);
+                box-shadow: 0 4px 10px rgba(26, 95, 180, 0.28);
+            }
+
+            .opciones-iniciales button:active {
+                transform: translateY(0);
+                box-shadow: none;
             }
 
 }
