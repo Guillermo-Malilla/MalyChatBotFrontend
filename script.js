@@ -470,4 +470,12 @@ function finalizarQuiz() {
     enModoQuiz = false;
     inputUsuario.disabled = false;
     validarEntrada(); 
+
+    function enviarOpcion(texto) {
+    const opciones = document.getElementById('opciones-iniciales');
+    if (opciones) opciones.remove();
+    const input = document.getElementById('input-usuario');
+    input.value = texto;
+    enviarMensaje();
+}
 }
